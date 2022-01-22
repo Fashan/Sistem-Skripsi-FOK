@@ -50,7 +50,7 @@
 									<?php else: ?>
 									<input type="checkbox" class="" id="check_buktirevisi" checked>
 								<?php endif ?>
-								<label class="form-check-label" for="check_buktirevisi">Bukti sudah selesai revisi keseluuruhan</label>
+								<label class="form-check-label" for="check_buktirevisi">Bukti sudah selesai revisi keseluruhan</label>
 							</div>
 						</div>
 						<div class="col-7">
