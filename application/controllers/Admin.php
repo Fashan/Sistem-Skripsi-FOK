@@ -402,11 +402,6 @@ class Admin extends CI_Controller {
 	}
 
 	function jadwalkan_yudisium(){
-		$input = $this->input->post(null,true);
-		$where = ['mahasiswa_id' => $input['mahasiswa_id'],
-					'prasyarat'  => 'yudisium'
-	];
-		$this->main->update('prasyarat',['status' => 'diterima'],$where);
 		$this->main->update('users',['status' => 'yudisium'],['user_id' => $input['mahasiswa_id']]);
 		$input['keterangan'] = 'yudisium';
 		$input['status'] = 'akan berlangsung';
