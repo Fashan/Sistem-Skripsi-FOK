@@ -255,10 +255,6 @@ class Admin extends CI_Controller {
 
 	function jadwalkan_sidang_skripsi(){
 		$input = $this->input->post(null,true);
-		$where = ['mahasiswa_id' => $input['mahasiswa_id'],
-					'prasyarat'  => 'skripsi'
-	];
-		$this->main->update('prasyarat',['status' => 'diterima'],$where);
 		$this->main->insert('nilai_skripsi',['mahasiswa_id' => $input['mahasiswa_id']]);
 		$this->main->insert('absen',['mahasiswa_id' => $input['mahasiswa_id'],'pembimbing_1' => 'belum','pembimbing_2' => 'belum','penguji_1' => 'belum','penguji_2' => 'belum','jenis_kegiatan' => 'sidang skripsi' ]);
 		$this->main->update('users',['status' => 'sidang skripsi'],['user_id' => $input['mahasiswa_id']]);
