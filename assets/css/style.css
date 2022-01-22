@@ -1,0 +1,36 @@
+.bg-maroon {
+	background-color: #800000;
+}
+
+.color-navy {
+	color: #000080;
+}
+
+
+
+.bg-gradient-maroon {
+	background: linear-gradient(87deg, #af0101 0, #000000 100%) !important;
+}
+
+.logo-login {
+	width: 50%;
+}
+
+.note-card h5{
+	margin-left: 20px;
+}
+.note-card ul li{
+	font-size: 1vw;
+}
+
+.zoom {
+	transition: transform .2s;
+	width: 200px;
+	margin: 0 auto;
+  }
+  
+  .zoom:hover {
+	-ms-transform: scale(2); /* IE 9 */
+	-webkit-transform: scale(2); /* Safari 3-8 */
+	transform: scale(2); 
+  }
