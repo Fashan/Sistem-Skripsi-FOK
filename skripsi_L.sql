@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 21, 2022 at 06:37 AM
+-- Generation Time: Jan 23, 2022 at 10:21 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 7.3.31
 
@@ -43,7 +43,9 @@ CREATE TABLE `absen` (
 
 INSERT INTO `absen` (`id`, `mahasiswa_id`, `pembimbing_1`, `pembimbing_2`, `penguji_1`, `penguji_2`, `jenis_kegiatan`) VALUES
 (2, 53, 'hadir', 'hadir', 'hadir', 'belum', 'seminar proposal'),
-(3, 53, 'hadir', 'hadir', 'hadir', 'belum', 'sidang skripsi');
+(3, 53, 'hadir', 'hadir', 'hadir', 'belum', 'sidang skripsi'),
+(4, 55, 'hadir', 'hadir', 'belum', 'hadir', 'seminar proposal'),
+(5, 55, 'hadir', 'hadir', 'hadir', 'belum', 'sidang skripsi');
 
 -- --------------------------------------------------------
 
@@ -57,7 +59,7 @@ CREATE TABLE `bimbingan_proposal` (
   `dosen_id` bigint(11) NOT NULL,
   `tanggal` date NOT NULL,
   `bimbingan` text NOT NULL,
-  `status` varchar(100) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
   `role_id` int(11) NOT NULL,
   `file` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -67,7 +69,13 @@ CREATE TABLE `bimbingan_proposal` (
 --
 
 INSERT INTO `bimbingan_proposal` (`id`, `mahasiswa_id`, `dosen_id`, `tanggal`, `bimbingan`, `status`, `role_id`, `file`) VALUES
-(141, 53, 47, '2022-01-11', 'bimbingan 1', '', 1, 'Iji_Format_AR_Musium_new.docx');
+(141, 53, 47, '2022-01-11', 'bimbingan 1', '', 1, 'Iji_Format_AR_Musium_new.docx'),
+(146, 55, 47, '2022-01-22', 'bab 1', '', 1, 'Iji_Format_AR_Musium_new.docx'),
+(147, 55, 48, '2022-01-22', 'bab 1', '', 1, 'Iji_Format_AR_Musium_new.docx'),
+(148, 55, 47, '2022-01-22', 'bab 1', '', 2, 'Iji_Format_AR_Musium_new.docx'),
+(149, 55, 48, '2022-01-22', 'bab 1', '', 2, 'Iji_Format_AR_Musium_new.docx'),
+(151, 55, 50, '2022-01-22', 'revisi 1', '', 1, 'Iji_Format_AR_Musium_new.docx'),
+(152, 55, 50, '2022-01-22', 'revisi 1', '', 2, 'Iji_Format_AR_Musium_new.docx');
 
 -- --------------------------------------------------------
 
@@ -81,10 +89,20 @@ CREATE TABLE `bimbingan_skripsi` (
   `dosen_id` bigint(11) NOT NULL,
   `tanggal` date NOT NULL,
   `bimbingan` text NOT NULL,
-  `status` varchar(100) NOT NULL,
+  `status` varchar(100) DEFAULT NULL,
   `role_id` int(11) NOT NULL,
   `file` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `bimbingan_skripsi`
+--
+
+INSERT INTO `bimbingan_skripsi` (`id`, `mahasiswa_id`, `dosen_id`, `tanggal`, `bimbingan`, `status`, `role_id`, `file`) VALUES
+(69, 55, 47, '2022-01-22', 'bab 1', '', 1, 'Iji_Format_AR_Musium_new.docx'),
+(70, 55, 48, '2022-01-22', 'bab 1', '', 1, 'Iji_Format_AR_Musium_new.docx'),
+(71, 55, 47, '2022-01-22', 'bab 1', '', 2, 'Iji_Format_AR_Musium_new.docx'),
+(72, 55, 48, '2022-01-22', 'bab 1', '', 2, 'Iji_Format_AR_Musium_new.docx');
 
 -- --------------------------------------------------------
 
@@ -107,7 +125,10 @@ CREATE TABLE `events` (
 INSERT INTO `events` (`id`, `tanggal`, `mahasiswa_id`, `keterangan`, `status`) VALUES
 (43, '2022-01-05 5:14 PM', 53, 'seminar proposal', 'selesai'),
 (46, '2022-1-06 7:16 AM', 53, 'sidang skripsi', 'selesai'),
-(47, '2022-1-05 12:25 PM', 53, 'yudisium', 'akan berlangsung');
+(47, '2022-1-05 12:25 PM', 53, 'yudisium', 'selesai'),
+(48, '2022-1-06 9:51 AM', 55, 'seminar proposal', 'selesai'),
+(49, '2022-1-07 10:09 AM', 55, 'sidang skripsi', 'selesai'),
+(52, '2022-01-08 5:00 PM', 55, 'yudisium', 'akan berlangsung');
 
 -- --------------------------------------------------------
 
@@ -123,7 +144,7 @@ CREATE TABLE `ide_skripsi` (
   `mahasiswa_id` bigint(11) NOT NULL,
   `status` varchar(100) NOT NULL,
   `catatan` text DEFAULT NULL,
-  `bukti` varchar(100) NOT NULL
+  `bukti` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -131,7 +152,8 @@ CREATE TABLE `ide_skripsi` (
 --
 
 INSERT INTO `ide_skripsi` (`id`, `judul`, `abstrak`, `file`, `mahasiswa_id`, `status`, `catatan`, `bukti`) VALUES
-(32, 'Tuliskan Judul Skripsi Disini', 'papakan abstrak', 'bab1_1815051077.pdf', 53, 'ACC', '', 'bukti_1815051077.pdf');
+(32, 'Tuliskan Judul Skripsi Disini', 'papakan abstrak', 'bab1_1815051077.pdf', 53, 'ACC', '', 'bukti_1815051077.pdf'),
+(33, 'sebuah judul pertama', 'sebuah abstrak', 'example.pdf', 55, 'ACC', '', 'example.pdf');
 
 -- --------------------------------------------------------
 
@@ -171,7 +193,8 @@ CREATE TABLE `moderator` (
 --
 
 INSERT INTO `moderator` (`id`, `mahasiswa_id`, `nama`, `nim`) VALUES
-(7, 53, 'mahasiswa2', '1815051078');
+(7, 53, 'mahasiswa2', '1815051078'),
+(8, 55, 'mahasiswa3', '1815051079');
 
 -- --------------------------------------------------------
 
@@ -193,7 +216,8 @@ CREATE TABLE `nilai_proposal` (
 --
 
 INSERT INTO `nilai_proposal` (`id`, `mahasiswa_id`, `pembimbing_1`, `pembimbing_2`, `penguji_1`, `penguji_2`) VALUES
-(12, 53, 80, 82.5, 88.5, NULL);
+(12, 53, 80, 82.5, 88.5, NULL),
+(17, 55, 80, 90, NULL, 75);
 
 -- --------------------------------------------------------
 
@@ -215,7 +239,8 @@ CREATE TABLE `nilai_skripsi` (
 --
 
 INSERT INTO `nilai_skripsi` (`id`, `mahasiswa_id`, `pembimbing_1`, `pembimbing_2`, `penguji_1`, `penguji_2`) VALUES
-(27, 53, '80', '90', '90', NULL);
+(27, 53, '80', '90', '90', NULL),
+(28, 55, '90', '90', '85', NULL);
 
 -- --------------------------------------------------------
 
@@ -239,7 +264,11 @@ INSERT INTO `pembimbing` (`id`, `dosen_id`, `mahasiswa_id`, `role_id`, `status`)
 (99, 47, 53, 4, 'sudah'),
 (100, 48, 53, 6, 'sudah'),
 (109, 49, 53, 14, 'sudah'),
-(110, 50, 53, 15, 'sudah');
+(110, 50, 53, 15, 'sudah'),
+(111, 47, 55, 4, 'sudah'),
+(112, 48, 55, 6, 'sudah'),
+(113, 49, 55, 14, 'sudah'),
+(114, 50, 55, 15, 'sudah');
 
 -- --------------------------------------------------------
 
@@ -266,7 +295,8 @@ CREATE TABLE `prasyarat_proposal` (
 --
 
 INSERT INTO `prasyarat_proposal` (`id`, `mahasiswa_id`, `file_proposal`, `file_kdn`, `file_kartubimbingan`, `file_khs`, `status_fileproposal`, `status_filekdn`, `status_filekartubimbingan`, `status_filekhs`, `status_prasyarat`) VALUES
-(5, 53, 'example.pdf', 'example1.pdf', 'example2.pdf', 'example3.pdf', 'check', 'check', 'check', 'check', 'diterima');
+(5, 53, 'example.pdf', 'example1.pdf', 'example2.pdf', 'example3.pdf', 'check', 'check', 'check', 'check', 'diterima'),
+(7, 55, 'example.pdf', 'example1.pdf', 'example2.pdf', 'example3.pdf', 'check', 'check', 'check', 'check', 'diterima');
 
 -- --------------------------------------------------------
 
@@ -307,7 +337,8 @@ CREATE TABLE `prasyarat_skripsi` (
 --
 
 INSERT INTO `prasyarat_skripsi` (`id`, `mahasiswa_id`, `file_transkipnilai`, `file_biodatafoto`, `file_suratlab`, `file_bebaspiutang`, `file_surattugas`, `file_coverskripsi`, `file_kartubimbingan`, `file_piagam`, `file_buktisumbangan`, `file_skripsi`, `file_buktiartikel`, `status_transkipnilai`, `status_biodatafoto`, `status_suratlab`, `status_bebaspiutang`, `status_surattugas`, `status_coverskripsi`, `status_kartubimbingan`, `status_piagam`, `status_buktisumbangan`, `status_fileskripsi`, `status_buktiartikel`, `status_prasyarat`) VALUES
-(23, 53, 'example.pdf', 'example1.pdf', 'example3.pdf', 'example4.pdf', 'example5.pdf', 'example6.pdf', 'example2.pdf', 'example7.pdf', 'example8.pdf', 'example9.pdf', 'example10.pdf', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'diterima');
+(23, 53, 'example.pdf', 'example1.pdf', 'example3.pdf', 'example4.pdf', 'example5.pdf', 'example6.pdf', 'example2.pdf', 'example7.pdf', 'example8.pdf', 'example9.pdf', 'example10.pdf', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'diterima'),
+(24, 55, 'example.pdf', 'example1.pdf', 'example3.pdf', 'example4.pdf', 'example5.pdf', 'example6.pdf', 'example2.pdf', 'example7.pdf', 'example8.pdf', 'example9.pdf', 'example10.pdf', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'check', 'diterima');
 
 -- --------------------------------------------------------
 
@@ -330,7 +361,8 @@ CREATE TABLE `prasyarat_yudisium` (
 --
 
 INSERT INTO `prasyarat_yudisium` (`id`, `mahasiswa_id`, `file_buktirevisi`, `file_buktipublikasi`, `status_buktirevisi`, `status_buktipublikasi`, `status_prasyarat`) VALUES
-(1, 53, 'example.pdf', 'example1.pdf', 'check', 'check', 'diterima');
+(1, 53, 'example.pdf', 'example1.pdf', 'check', 'check', 'diterima'),
+(2, 55, 'example.pdf', 'example1.pdf', 'check', 'check', 'diterima');
 
 -- --------------------------------------------------------
 
@@ -376,7 +408,8 @@ CREATE TABLE `proposal` (
 --
 
 INSERT INTO `proposal` (`id`, `mahasiswa_id`, `judul`, `abstrak`, `file`, `status_p1`, `status_p2`, `status_pnj1`, `status_pnj2`, `catatan`) VALUES
-(17, 53, 'Tuliskan Judul Skripsi Disini', 'papakan abstrak', NULL, 'ACC', 'ACC', 'ACC', 'belum ACC', 'lulus dengan tanpa revisi');
+(17, 53, 'Tuliskan Judul Skripsi Disini', 'papakan abstrak', NULL, 'ACC', 'ACC', 'ACC', 'belum ACC', 'lulus dengan tanpa revisi'),
+(18, 55, 'sebuah judul pertama', 'sebuah abstrak', 'example.pdf', 'ACC', 'ACC', 'belum ACC', 'ACC', 'lulus dengan tanpa revisi');
 
 -- --------------------------------------------------------
 
@@ -433,7 +466,8 @@ CREATE TABLE `skripsi` (
 --
 
 INSERT INTO `skripsi` (`id`, `mahasiswa_id`, `judul`, `abstrak`, `file`, `status_pem1`, `status_pem2`, `status_pnj1`, `status_pnj2`, `catatan`) VALUES
-(19, 53, 'Tuliskan Judul Skripsi Disini', 'papakan abstrak', NULL, 'ACC', 'ACC', 'ACC', 'belum ACC', 'lulus dengan revisi');
+(19, 53, 'Tuliskan Judul Skripsi Disini', 'papakan abstrak', NULL, 'ACC', 'ACC', 'ACC', 'belum ACC', 'lulus dengan revisi'),
+(20, 55, 'sebuah judul pertama', 'sebuah abstrak', 'example.pdf', 'ACC', 'ACC', 'ACC', 'belum ACC', 'lulus dengan revisi 1 bulan');
 
 -- --------------------------------------------------------
 
@@ -467,7 +501,8 @@ INSERT INTO `users` (`user_id`, `prodi_id`, `jurusan_id`, `username`, `nama`, `e
 (50, 1, 5, '1815051074', 'dosen4', 'dosen4@gmail.com', '$2y$10$0fvsOywaEPn3BzLYZ6cX9.bU6V.4oplxSf2xYVsxj/yz3cJPNxjCa', NULL, 2, NULL, NULL),
 (51, 1, 5, '1815051075', 'korprodi1', 'kaprodi1@gmail.com', '$2y$10$OJhENHJN0f/ycY6QFvgu8e4tuPKIYH22H0IxdVwhHb8d8WE0LTJUW', NULL, 10, NULL, NULL),
 (52, 1, 5, '1815051076', 'pa1', 'pa1@gmail.com', '$2y$10$NYAawj3T6dGeDIREXjKQI.8aV.ClnyKNArlZEefRcuiug/hxx4mDy', NULL, 11, NULL, NULL),
-(53, 1, 5, '1815051077', 'mahasiswa1', 'mahasiswa1@gmail.com', '$2y$10$iMjTsdmqNe8Op0We462RSeO8KFGAsci0C8Z8LkrLj0ev41.JHfIq.', NULL, 1, 52, 'yudisium');
+(53, 1, 5, '1815051077', 'mahasiswa1', 'mahasiswa1@gmail.com', '$2y$10$iMjTsdmqNe8Op0We462RSeO8KFGAsci0C8Z8LkrLj0ev41.JHfIq.', 'ac1c8b51e28dd3321a2b365dd4489201.PNG', 1, 52, 'yudisium'),
+(55, 1, 2, '1815051078', 'mahasiswa2', 'mahasiswa2@gmail.com', '$2y$10$014PbfGwWG6Zb2KunUjxDuONKaSywcRfkrPsEfoO2etQYEM494n4G', NULL, 1, 52, 'yudisium');
 
 --
 -- Indexes for dumped tables
@@ -609,91 +644,91 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `absen`
 --
 ALTER TABLE `absen`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `bimbingan_proposal`
 --
 ALTER TABLE `bimbingan_proposal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=142;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
 
 --
 -- AUTO_INCREMENT for table `bimbingan_skripsi`
 --
 ALTER TABLE `bimbingan_skripsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `events`
 --
 ALTER TABLE `events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `ide_skripsi`
 --
 ALTER TABLE `ide_skripsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `jurusan`
 --
 ALTER TABLE `jurusan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `moderator`
 --
 ALTER TABLE `moderator`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `nilai_proposal`
 --
 ALTER TABLE `nilai_proposal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `nilai_skripsi`
 --
 ALTER TABLE `nilai_skripsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `pembimbing`
 --
 ALTER TABLE `pembimbing`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `prasyarat_proposal`
 --
 ALTER TABLE `prasyarat_proposal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `prasyarat_skripsi`
 --
 ALTER TABLE `prasyarat_skripsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `prasyarat_yudisium`
 --
 ALTER TABLE `prasyarat_yudisium`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `prodi`
 --
 ALTER TABLE `prodi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `proposal`
 --
 ALTER TABLE `proposal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -705,13 +740,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `skripsi`
 --
 ALTER TABLE `skripsi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `user_id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Constraints for dumped tables
