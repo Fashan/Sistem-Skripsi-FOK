@@ -61,7 +61,11 @@
 								<?php else : ?>
 									<input type="checkbox" class="" id="check_penguji1" checked>
 								<?php endif ?>
-								<label class="form-check-label" for="check_penguji1"><?= $dosen[2]->nama ?> (Penguji 1 Proposal)</label>
+								<?php if ($dosen[2]) : ?>
+									<label class="form-check-label" for="check_penguji1"><?= $dosen[2]->nama ?> (Penguji 1 Proposal)</label>
+								<?php else : ?>
+									<label class="form-check-label">belum dipilih</label>
+								<?php endif ?>
 							</div>
 						</div>
 
@@ -83,7 +87,11 @@
 								<?php else : ?>
 									<input type="checkbox" class="" id="check_penguji2" checked>
 								<?php endif ?>
-								<label class="form-check-label" for="check_penguji2"><?= $dosen[3]->nama ?> (Penguji 2 Proposal)</label>
+								<?php if ($dosen[3]) : ?>
+									<label class="form-check-label" for="check_penguji2"><?= $dosen[3]->nama ?> (Penguji 2 Proposal)</label>
+								<?php else : ?>
+									<label class="form-check-label" >belum dipilih</label>
+								<?php endif ?>
 							</div>
 						</div>
 						
