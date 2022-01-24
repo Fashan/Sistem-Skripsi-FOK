@@ -143,7 +143,12 @@ function tabel_ajukanjudul() {
 		$row = array();
 		$row[] = $no;
 		$row[] = $judul->judul;
-		$row[] = $judul->abstrak;
+		if (strlen($judul->abstrak) >= 10) {
+			$row[] = '<div class="text-wrap">'.substr($judul->abstrak,0,10).'...<button class="btn btn-sm text-primary" onclick="infojudul_mahasiswa('.$judul->id.')"><i>selengkapnya</i></button></div>';
+		}else {
+			$row[] = $judul->abstrak;
+		}
+		
 		$row[] = $judul->file;
 		$row[] = '<div class="button-group">
 <button class="btn btn-sm btn-danger" onClick="deleteJudul('.$judul->id.');"><i class="fa fa-trash"></i></button>
@@ -226,7 +231,11 @@ function tabel_dashboardajukanjudul() {
 		$row = array();
 		$row[] = $no;
 		$row[] = $judul->judul;
-		$row[] = $judul->abstrak;
+		if (strlen($judul->abstrak) >= 10) {
+			$row[] = '<div class="text-wrap">'.substr($judul->abstrak,0,10).'...<button class="btn btn-sm text-primary" onclick="infojudul_mahasiswa('.$judul->id.')"><i>selengkapnya</i></button></div>';
+		}else {
+			$row[] = $judul->abstrak;
+		}
 		if ($judul->status =="ditolak") {
 			$row[] = '<div class="button-group">
 <button class="btn btn-sm btn-danger" onClick="catatan('.$judul->id.');"><i class="far fa-times-circle"></i> ditolak</button>
@@ -1089,6 +1098,16 @@ function tabel_nilaiskripsi() {
 			);
 	// output to json format
 	echo json_encode($output);
+}
+
+public function get_infojudul(){
+	$id = $this->input->post('id',true);
+	$this->db->select('ide_skripsi.*,users.nama');
+	$this->db->from('ide_skripsi');
+	$this->db->join('users', 'ide_skripsi.mahasiswa_id = users.user_id AND ide_skripsi.id = '.$id);
+	$query =$this->db->get();
+	$judul = $query->row();
+	echo json_encode($judul);
 }
 }
 

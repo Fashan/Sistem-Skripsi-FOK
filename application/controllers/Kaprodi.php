@@ -26,7 +26,11 @@ function tabel_judulmahasiswa() {
 		$row[] = $no;
 		$row[] = $judul->nama;
 		$row[] = $judul->judul;
-		$row[] = $judul->abstrak;
+		if (strlen($judul->abstrak) >= 10) {
+			$row[] = '<div class="text-wrap">'.substr($judul->abstrak,0,10).'...</div>';
+		}else {
+			$row[] = $judul->abstrak;
+		}
 		$row[] = $judul->status;
 		if ($judul->status=="ACC" && $judul->bukti != null) {
 			$row[] = '<div class="button-group">

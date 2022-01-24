@@ -116,101 +116,112 @@ var filenameskripsi = (function () {
 
 	})
 })();
-
 var prasyarat_seminarproposal = (function () {
-	$('#file_proposal').change(function () {
+	$(document).on('change', '#file_proposal', function () {
 		var file_data = $('#file_proposal').prop('files')[0];
 		$('#filename_proposal').text(file_data.name);
 
-	})
-	$('#file_kdn').change(function () {
+	});
+	$(document).on('change', '#file_kdn', function () {
 		var file_data = $('#file_kdn').prop('files')[0];
 		$('#filename_kdn').text(file_data.name);
 
-	})
-	$('#file_kartubimbingan').change(function () {
+	});
+	$(document).on('change', '#file_kartubimbingan', function () {
 		var file_data = $('#file_kartubimbingan').prop('files')[0];
 		$('#filename_kartubimbingan').text(file_data.name);
 
-	})
-	$('#file_khs').change(function () {
+	});
+	$(document).on('change', '#file_khs', function () {
 		var file_data = $('#file_khs').prop('files')[0];
 		$('#filename_khs').text(file_data.name);
+	});
 
-	})
 })();
 
 var prasyarat_sidangskripsi = (function () {
-	$('#file_transkipnilai').change(function () {
+	$(document).on('change', '#file_transkipnilai', function () {
 		var file_data = $('#file_transkipnilai').prop('files')[0];
 		$('#filename_transkipnilai').text(file_data.name);
 
-	})
-	$('#file_biodatafoto').change(function () {
+	});
+
+	$(document).on('change', '#file_biodatafoto', function () {
 		var file_data = $('#file_biodatafoto').prop('files')[0];
 		$('#filename_biodatafoto').text(file_data.name);
 
-	})
-	$('#file_suratlab').change(function () {
+	});
+
+	$(document).on('change', '#file_suratlab', function () {
 		var file_data = $('#file_suratlab').prop('files')[0];
 		$('#filename_suratlab').text(file_data.name);
 
-	})
-	$('#file_bebaspiutang').change(function () {
+	});
+
+	$(document).on('change', '#file_bebaspiutang', function () {
 		var file_data = $('#file_bebaspiutang').prop('files')[0];
 		$('#filename_bebaspiutang').text(file_data.name);
 
-	})
-	$('#file_surattugas').change(function () {
+	});
+
+	$(document).on('change', '#file_surattugas', function () {
 		var file_data = $('#file_surattugas').prop('files')[0];
 		$('#filename_surattugas').text(file_data.name);
 
-	})
-	$('#file_coverskripsi').change(function () {
+	});
+	
+	$(document).on('change', '#file_coverskripsi', function () {
 		var file_data = $('#file_coverskripsi').prop('files')[0];
 		$('#filename_coverskripsi').text(file_data.name);
 
-	})
-	$('#file_kartubimbingan').change(function () {
+	});
+
+
+	$(document).on('change', '#file_kartubimbingan', function () {
 		var file_data = $('#file_kartubimbingan').prop('files')[0];
 		$('#filename_kartubimbingan').text(file_data.name);
 
-	})
-	$('#file_piagam').change(function () {
+	});
+
+	$(document).on('change', '#file_piagam', function () {
 		var file_data = $('#file_piagam').prop('files')[0];
 		$('#filename_piagam').text(file_data.name);
 
-	})
-	$('#file_buktisumbangan').change(function () {
+	});
+	
+	$(document).on('change', '#file_buktisumbangan', function () {
 		var file_data = $('#file_buktisumbangan').prop('files')[0];
 		$('#filename_buktisumbangan').text(file_data.name);
 
-	})
-	$('#file_skripsi').change(function () {
+	});
+
+	$(document).on('change', '#file_skripsi', function () {
 		var file_data = $('#file_skripsi').prop('files')[0];
 		$('#filename_skripsi').text(file_data.name);
 
-	})
-	$('#file_buktiartikel').change(function () {
+	});
+
+	$(document).on('change', '#file_buktiartikel', function () {
 		var file_data = $('#file_buktiartikel').prop('files')[0];
 		$('#filename_buktiartikel').text(file_data.name);
 
-	})
+	});
+	
 })();
 
 var prasyarat_yudisium = (function () {
-	$('#file_buktirevisi').change(function () {
+	$(document).on('change', '#file_buktirevisi', function () {
 		var file_data = $('#file_buktirevisi').prop('files')[0];
 		$('#filename_buktirevisi').text(file_data.name);
-
-	})
-	$('#file_buktipublikasi').change(function () {
+	});
+	$(document).on('change', '#file_buktipublikasi', function () {
 		var file_data = $('#file_buktipublikasi').prop('files')[0];
 		$('#filename_buktipublikasi').text(file_data.name);
 
-	})
+	});
 
 })();
+
 
 var filenamereferensi = (function () {
 	$(document).on('change','#file_referensi',function () {
@@ -1179,6 +1190,9 @@ function jadwalkan_yudisium(id) {
 	var tanggal = $('#tanggal_yudisium').val();
 	var jam = $('#timepicker').val();
 	$.ajax({
+		beforeSend: function(){
+			$('.btn-jadwal').html('<p>sedang diproses</p>');
+		},
 		type: "post",
 		url: base_url + "admin/jadwalkan_yudisium",
 		data: "mahasiswa_id=" + id + "&tanggal=" + tanggal + ' ' + jam,
@@ -1341,4 +1355,23 @@ function acc_pa(id) {
 	if (confirm('apakah Anda ingin meng-ACC judul ini?')) {
 		location.href = base_url + 'PA/acc/' + id;
 	}
+}
+
+
+function infojudul_mahasiswa(idx) {
+	var id = idx;
+	$.ajax({
+		url: base_url + 'mahasiswa/get_infojudul',
+		type: 'post',
+		data: 'id=' + id,
+		dataType: "json",
+		success: function (response) {
+			$('#modal-judul').modal('show');
+			$('#nama_mahasiswa').text(response.nama);
+			$('#judul2').text(response.judul);
+			$('#abstrak2').text(response.abstrak);
+		}
+
+	})
+
 }
