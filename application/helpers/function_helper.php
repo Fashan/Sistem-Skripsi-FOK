@@ -250,6 +250,14 @@ function check_nilai_proposal($id){
 				return false;
 			}
 		}
+
+		if ($absen->pembimbing_1 == 'hadir' && $absen->pembimbing_2 == 'hadir' && $absen->penguji_1 == 'hadir' && $absen->penguji_2 == 'hadir') {
+			if ($nilai->pembimbing_1 != '' && $nilai->pembimbing_2 != '' && $nilai->penguji_1 != '' && $nilai->penguji_2 != '') {
+				return true;
+			}else {
+				return false;
+			}
+		}
 	}else {
 		return false;
 	}
@@ -286,6 +294,15 @@ function check_nilai_skripsi($id){
 
 		if ($absen->penguji_2 != 'hadir') {
 			if ($nilai->pembimbing_1 != '' && $nilai->pembimbing_2 != '' && $nilai->penguji_1 != '') {
+				return true;
+			}else {
+				return false;
+			}
+		}
+
+		
+		if ($absen->pembimbing_1 == 'hadir' && $absen->pembimbing_2 == 'hadir' && $absen->penguji_1 == 'hadir' && $absen->penguji_2 == 'hadir') {
+			if ($nilai->pembimbing_1 != '' && $nilai->pembimbing_2 != '' && $nilai->penguji_1 != '' && $nilai->penguji_2 != '') {
 				return true;
 			}else {
 				return false;
