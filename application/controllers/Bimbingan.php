@@ -249,7 +249,7 @@ public function __construct()
 				</div>';
 			}else{
 				$row[] = '<div class="button-group">
-				<a href="'.base_url('bimbingan/download_filebimbingan/Pembimbing_1_Skripsi/'.$bimbingan->nim.'/'.$bimbingan->file).'" class="btn btn-sm btn-success"><i class="fa fa-download"></i> '.$bimbingan->file.'</a>
+				<a href="'.base_url('bimbingan/download_filebimbingan/Pembimbing_2_Skripsi/'.$bimbingan->nim.'/'.$bimbingan->file).'" class="btn btn-sm btn-success"><i class="fa fa-download"></i> '.$bimbingan->file.'</a>
 				</div>';
 			}
 			if ($bimbingan->oleh == "mahasiswa") {
