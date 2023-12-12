@@ -118,7 +118,33 @@
 					</div>
 			  </div>
 				<?php else : ?>
-					<p>mohon maaf Anda tidak dapat mengakses sistem</p>
+					<?php if ($jadwal) : ?>
+						<?php if ($jadwal->status == 'akan berlangsung') : ?>
+							<div class="row mt-3">
+							<div class="col-md-12">
+								<div class="d-flex flex-column">
+								<div class="align-self-center">
+										<div class="unduh-skripsi">
+											<?php if ($keputusan == "ACC") : ?>
+												<button data-toggle="modal" data-target="#nilai_skripsi" class="btn btn-success text-white" data-aos="zoom-in">berikan nilai</button>
+												<?php else: ?>
+													<?php if ($skripsi->file) : ?>
+													<a href="<?= base_url("mahasiswa/download_skripsi/".$skripsi->file) ?>" class="btn btn-success text-white" data-aos="zoom-in" data-aos-offset="50">Unduh Skripsi Fix</a>
+													<?php else: ?>
+														<button class="btn btn-success text-white" disabled>Unduh skripsi Fix</button>
+												<?php endif ?>
+											<?php endif ?>
+										</div>
+							
+								</div>
+								</div>
+									</div>
+							</div>
+						<?php else: ?>
+							<center><p>mohon maaf Anda tidak dapat mengakses sistem</p></center>
+						<?php endif ?>
+					<?php endif ?>
+					
 				<?php endif ?>
 			<?php endif ?>
 		

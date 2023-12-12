@@ -249,7 +249,7 @@ public function __construct()
 				</div>';
 			}else{
 				$row[] = '<div class="button-group">
-				<a href="'.base_url('bimbingan/download_filebimbingan/Pembimbing_2_Skripsi/'.$bimbingan->nim.'/'.$bimbingan->file).'" class="btn btn-sm btn-success"><i class="fa fa-download"></i> '.$bimbingan->file.'</a>
+				<a href="'.base_url('bimbingan/download_filebimbingan/Pembimbing_1_Skripsi/'.$bimbingan->nim.'/'.$bimbingan->file).'" class="btn btn-sm btn-success"><i class="fa fa-download"></i> '.$bimbingan->file.'</a>
 				</div>';
 			}
 			if ($bimbingan->oleh == "mahasiswa") {
@@ -1271,6 +1271,8 @@ public function info_mahasiswa2($mahasiswa_id)
 		}
 	}
 
+	$jadwal = $this->main->get_where('events',['mahasiswa_id' => $mahasiswa_id,'keterangan' => "seminar proposal"]);
+
 	if ($row[0]->role == "Penguji 1 Proposal") {
 		$proposal = $this->main->get_where('proposal',['mahasiswa_id' => $mahasiswa_id]);
 		$data['keputusan'] = $proposal->status_pnj1;
@@ -1283,6 +1285,7 @@ public function info_mahasiswa2($mahasiswa_id)
 	$data["penguji"] = $row;
 	$data["proposal"] = $this->main->get_where('proposal',['mahasiswa_id' => $mahasiswa_id]);
 	$data["role"] = $this->main->get('role');
+	$data["jadwal"] = $jadwal;
 	$data["judul"] = "SIF-OKe";
 	$data['breadcrumb'] = '<li class="breadcrumb-item"><a href="'.base_url('dashboard').'"><i class="fas fa-home"></i></a></li>
 	<li class="breadcrumb-item"><a href="">Bimbingan</a></li>
@@ -1305,7 +1308,7 @@ public function info_mahasiswa4($mahasiswa_id)
 			$row[1] = $p;
 		}
 	}
-
+	$jadwal = $this->main->get_where('events',['mahasiswa_id' => $mahasiswa_id,'keterangan' => 'sidang skripsi']);
 	if ($row[0]->role == "Penguji 1 Skripsi/TA") {
 		$skripsi = $this->main->get_where('skripsi',['mahasiswa_id' => $mahasiswa_id]);
 		$data['keputusan'] = $skripsi->status_pnj1;
@@ -1318,6 +1321,7 @@ public function info_mahasiswa4($mahasiswa_id)
 	$data["penguji"] = $row;
 	$data["skripsi"] = $this->main->get_where('skripsi',['mahasiswa_id' => $mahasiswa_id]);
 	$data["role"] = $this->main->get('role');
+	$data["jadwal"] = $jadwal;
 	$data["judul"] = "SIF-OKe";
 	$data['breadcrumb'] = '<li class="breadcrumb-item"><a href="'.base_url('dashboard').'"><i class="fas fa-home"></i></a></li>
 	<li class="breadcrumb-item"><a href="">Bimbingan</a></li>

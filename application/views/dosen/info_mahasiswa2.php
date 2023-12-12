@@ -116,7 +116,29 @@
 					</div>
 			  </div>
 				<?php else : ?>
-					<div class="row mt-3" data-aos="zoom-in" data-aos-offset="50">
+					<?php if ($jadwal) : ?>
+						<?php if ($jadwal->status == 'akan berlangsung') : ?>
+							<div class="row mt-3" data-aos="zoom-in" data-aos-offset="50">
+									<div class="col-md-12">
+										<div class="d-flex flex-column">
+										<div class="align-self-center">
+										<div class="unduh-proposal" data-link = "<?= base_url("mahasiswa/download_proposal/".$proposal->file) ?>">
+									<?php if ($keputusan == "ACC") : ?>
+										<button data-toggle="modal" data-target="#nilai_proposal" class="btn btn-success text-white" data-aos="zoom-in">berikan nilai</button>
+										<?php else: ?>
+										<?php if ($proposal->file) : ?>
+											<a href="<?= base_url("mahasiswa/download_proposal/".$proposal->file) ?>" class="btn btn-success text-white">Unduh Proposal Fix</a>
+											<?php else: ?>
+												<button class="btn btn-success text-white" disabled>Unduh Proposal Fix</button>
+												<?php endif ?>
+												<?php endif ?>
+											</div>
+										</div>
+										</div>
+											</div>
+									</div>
+							<?php else: ?>
+								<div class="row mt-3" data-aos="zoom-in" data-aos-offset="50">
 						<div class="col-md-12">
 							<div class="d-flex flex-column">
 								<div class="align-self-center">
@@ -126,6 +148,9 @@
 								</div>
 							</div>
 						</div>
+						<?php endif ?>
+					<?php endif ?>
+					
 				<?php endif ?>
 			<?php endif ?>
 			
